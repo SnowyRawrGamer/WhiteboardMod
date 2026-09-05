@@ -14,12 +14,20 @@
     <Compile Include="/Users/joelmclaughlin/whiteboardmod/src/Plugin.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="BepInEx">
+      <HintPath>/Users/joelmclaughlin/Documents/Steambuild 32 64bit DXVK.app/Contents/SharedSupport/prefix/drive_c/Program Files (x86)/Steam/steamapps/common/Big Walk/BepInEx/core/BepInEx.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     <Reference Include="BepInEx.Core">
       <HintPath>/Users/joelmclaughlin/Documents/Steambuild 32 64bit DXVK.app/Contents/SharedSupport/prefix/drive_c/Program Files (x86)/Steam/steamapps/common/Big Walk/BepInEx/core/BepInEx.Core.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Il2CppInterop.Runtime">
       <HintPath>/Users/joelmclaughlin/Documents/Steambuild 32 64bit DXVK.app/Contents/SharedSupport/prefix/drive_c/Program Files (x86)/Steam/steamapps/common/Big Walk/BepInEx/core/Il2CppInterop.Runtime.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>/Users/joelmclaughlin/Documents/Steambuild 32 64bit DXVK.app/Contents/SharedSupport/prefix/drive_c/Program Files (x86)/Steam/steamapps/common/Big Walk/BIG WALK_Data/Managed/UnityEngine.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
