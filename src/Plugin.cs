@@ -4,6 +4,7 @@ using BepInEx.Configuration;
 using BepInEx.Logging;
 using BepInEx.Unity.IL2CPP;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace Snowy.WhiteboardMod;
@@ -13,7 +14,7 @@ public sealed class Plugin : BasePlugin
 {
     private const string PluginGuid = "snowy.bigwalk.whiteboardmod";
     private const string PluginName = "Whiteboard Mod";
-    private const string PluginVersion = "0.4.0";
+    private const string PluginVersion = "0.4.1";
     private ConfigEntry<bool> _newStructures;
     private WhiteboardRuntime _runtime;
 
@@ -36,12 +37,14 @@ internal sealed class WhiteboardRuntime : MonoBehaviour
     private ConfigEntry<bool> _setting;
     private ManualLogSource _log;
     private GameObject _root;
+    private UnityAction<Scene, LoadSceneMode> _sceneLoadedHandler;
 
     public void Initialize(ConfigEntry<bool> setting, ManualLogSource log)
     {
         _setting = setting;
         _log = log;
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        _sceneLoadedHandler = new UnityAction<Scene, LoadSceneMode>(OnSceneLoaded);
+        SceneManager.sceneLoaded += _sceneLoadedHandler;
         Apply(_setting.Value);
     }
 
@@ -63,5 +66,10 @@ internal sealed class WhiteboardRuntime : MonoBehaviour
     }
 
     private static bool IsTutorial(string name) => string.Equals(name, "Tutorial", StringComparison.OrdinalIgnoreCase) || name.Contains("Tutorial", StringComparison.OrdinalIgnoreCase);
-    private void OnDestroy() => SceneManager.sceneLoaded -= OnSceneLoaded;
+
+    private void OnDestroy()
+    {
+        if (_sceneLoadedHandler != null)
+            SceneManager.sceneLoaded -= _sceneLoadedHandler;
+    }
 }
